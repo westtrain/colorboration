@@ -1,6 +1,6 @@
 const db = require("../models");
-const { Palette, Tag, sequelize } = require("../models");
-const { Op } = require("sequelize");
+const { Palette, sequelize } = require("../models");
+const { Op, literal } = require("sequelize");
 const moment = require("moment");
 
 module.exports = {
@@ -18,45 +18,27 @@ module.exports = {
   getFiltered: async (req, res) => {
     try {
       const tags = req.body.tags;
-      const paletteIds = [];
-      const paletteIdsAndTagIds = [];
-      const tagObjs = [];
-      for (let tag of tags) {
-        tagObjs.push({ tag_id: tag });
-      }
-      // console.log(tagObjs);
-      // [1,4]
-      // [Op.and]: [{tag_id: 5}, {tag_id: 6}]
-      // for (let tag of tags) {
-      const info = await db.sequelize.models.Tag_Palette.findAll({
-        attributes: {
-          exclude: ["createdAt", "updatedAt", "tag_id"],
-        },
+      const filteredPalettesInfos = [];
+
+      const paletteIdOnly = await db.sequelize.models.Tag_Palette.findAll({
+        attributes: ["palette_id"],
         where: {
-          [Op.and]: [{ tag_id: 1 }, { tag_id: 2 }],
-          // tag_id: tag,
+          [Op.or]: { tag_id: tags },
         },
+        group: "palette_id",
+        having: literal(`count(palette_id) = ${tags.length}`),
         raw: true,
       });
-
-      // console.log(paletteIdsAndTagIds);
-      // const filteredPalettesInfo = await Palette.findAll({
-      //   where: {
-      //     switch: {
-      //       [Op.or]: getSwitch,
-      //     },
-      //     color: color !== 2 ? color : { [Op.or]: [0, 1] },
-      //     backlight: backlight !== 2 ? backlight : { [Op.or]: [0, 1] },
-      //     tenkey: tenkey !== 2 ? tenkey : { [Op.or]: [0, 1] },
-      //     bluetooth: bluetooth !== 2 ? bluetooth : { [Op.or]: [0, 1] },
-      //     price: {
-      //       [Op.lte]: price,
-      //     },
-      //   },
-      //   raw: true,
-      // });
-      // return res.status(200);
-      return res.status(200).json({ data: filteredPalettesInfo });
+      // paletteIdOnly = [ { palette_id: 1 }, { palette_id: 2 } ]
+      for (let id of paletteIdOnly) {
+        const filteredPalettesInfo = await Palette.findAll({
+          where: { id: id.palette_id },
+          raw: true,
+        });
+        // console.log(filteredPalettesInfo[0]);
+        filteredPalettesInfos.push(filteredPalettesInfo[0]);
+      }
+      return res.status(200).json({ data: filteredPalettesInfos });
     } catch (error) {
       console.log(error);
       return res.sendStatus(500);
