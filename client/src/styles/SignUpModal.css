@@ -14,7 +14,7 @@
   place-items: center;
 }
 
-.modalview {
+.signupmodalview {
   background-color: #fff;
   border-radius: 20px;
   width: 400px;
@@ -24,27 +24,32 @@
   padding: 20px 25px 15px 25px;
 }
 
-.headarea {
+.signupClosed {
+  cursor: pointer;
+  font-size: 20px;
+  margin: -1.5em 0 -1em 19em;
+}
+
+.signupheadarea {
   font-size: 25px;
 }
 
-.area {
+.signuparea {
   color: #7e7c7c;
 }
 
-.area > div > span {
+.signuparea > div > span {
   float: right;
   font-size: 10px;
   color: rgb(250, 152, 123);
-  padding: 5px;
 }
 
 input {
   border: solid 1px #c4c3c3;
   border-radius: 5px;
-  height: 30px;
-  width: 300px;
-  margin: 10px 0 0 0;
+  height: 36px;
+  width: 308px;
+  margin: 5px 0 15px 0;
 }
 
 button {

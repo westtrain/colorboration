@@ -3,11 +3,13 @@ import { useSelector } from "react-redux";
 import axios from "axios";
 import "../styles/SignUpModal.css";
 import { EmailValidation, PasswordValidation } from "../utils/validation";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faTimes } from "@fortawesome/free-solid-svg-icons";
 function SignUpModal({ setShowSignUpModal }) {
   const [signUpState, setSignUpState] = useState({
     email: "",
     password: "",
-    userName: "",
+    name: "",
   });
   const state = useSelector((state) => state.usersReducer);
   const [emailErrorMessage, setEmailErrorMessage] = useState(""); // 이메일 유효 안내 메세지
@@ -16,7 +18,7 @@ function SignUpModal({ setShowSignUpModal }) {
   const [confirmPasswordMessage, setConfirmPasswordMessage] = useState(""); //비밀번호 확인 안내 메세지
   const [isValidPassword, setIsValidPassword] = useState(false); //confirm 비밀번호 일치 여부 저장
 
-  const { email, password, userName } = signUpState;
+  const { email, password, name } = signUpState;
 
   const onChangeSignUpState = (e) => {
     const { name, value } = e.target;
@@ -49,72 +51,65 @@ function SignUpModal({ setShowSignUpModal }) {
 
   const onClickSubmit = (e) => {
     e.preventDefault();
-    try {
-      if (!PasswordValidation(password)) {
-        // 패스워드 유효성 검사
-        setPasswordErrorMessage("특수문자 포함 6자 이상");
-      } else if (!EmailValidation(email)) {
-        setEmailErrorMessage("이메일 형식이 올바르지 않습니다");
-      } else if (userName !== "" && isValidPassword) {
-        // confirm 비밀번호 일치 확인
-        // 유저네임 중복 확인
-        axios
-          .post("http://localhost:4000/auth/name", {
-            headers: {
-              Authorization: localStorage.getItem(state.accessToken),
-            },
+    if (!PasswordValidation(password)) {
+      // 패스워드 유효성 검사
+      setPasswordErrorMessage("특수문자 포함 6자 이상");
+    } else if (!EmailValidation(email)) {
+      setEmailErrorMessage("이메일 형식이 올바르지 않습니다");
+    } else if (name !== "" && isValidPassword) {
+      // confirm 비밀번호 일치 확인
+      // 유저네임 중복 확인
+      axios
+        .post(
+          "http://localhost:4000/auth/name",
+          { name: signUpState.name },
+          {
             withCredentials: true,
-          })
-          .then((res) => {
-            console.log(res);
-          })
-          .then((res) => {
-            console.log(res.status);
-            if (res.status === 409) {
-              setNameErrorMessage("이미 사용 중인 이름입니다 ");
-            }
-            console.log(res);
-            console.log("회원정보 수정을 완료했습니다");
-          });
-      } else {
-        // 유저네임 중복 검사 통과 후 회원 가입 post 요청
-        axios
-          .post("http://localhost:4000/auth/signup", signUpState, {
-            withCredentials: true,
-          })
-          .then((res) => {
-            console.log(res);
-          })
-          .then((res) => {
-            console.log(res.status);
-            if (res.status === 401) {
-              setNameErrorMessage("회원가입 실패!");
-            }
-            console.log(res);
-            console.log("회원가입을 완료했습니다");
-            setShowSignUpModal(false);
-          });
-      }
-    } catch (err) {
-      setNameErrorMessage("정보가 잘못 입력 되었습니다");
+          }
+        )
+        .then((response) => {
+          console.log(response);
+          console.log("네임 중복 검사를 통과했습니다");
+          // 유저네임 중복 검사 통과 후 회원 가입 post 요청
+          axios
+            .post("http://localhost:4000/auth/signup", signUpState, {
+              withCredentials: true,
+            })
+            .then((res) => {
+              console.log(res.status);
+              console.log("회원가입을 완료했습니다");
+              setShowSignUpModal(false);
+            })
+            .catch((error) => {
+              console.log("error", error.response);
+              if (error.response.status === 401)
+                setNameErrorMessage("회원가입 실패!");
+            });
+        })
+        .catch((error) => {
+          console.log("error", error.response);
+          if (error.response.status === 409) {
+            setNameErrorMessage("이미 사용 중인 이름입니다 ");
+          }
+        });
     }
   };
 
   return (
     <div className="page">
       <div className="modalback">
-        <div className="modalview">
+        <div className="signupmodalview">
           <div
-            className="headarea"
+            className="signupClosed"
             onClick={() => {
               setShowSignUpModal();
             }}
           >
-            X
+            <FontAwesomeIcon icon={faTimes} size="1x" spin={false} />
           </div>
-          <div className="headarea ">SIGN UP</div>
+          <div className="signupheadarea ">SIGN UP</div>
           <form onSubmit={onClickSubmit}>
-            <div className="area emailarea">
+            <div className="signuparea signupemailarea">
               <div>
                 Email<span>{emailErrorMessage}</span>
               </div>
@@ -127,7 +122,7 @@ function SignUpModal({ setShowSignUpModal }) {
                 value={signUpState.email}
               />
             </div>
-            <div className="area passwordarea">
+            <div className="signuparea signuppasswordarea">
               <div>
                 Password
                 <span>{passwordErrorMessage}</span>
@@ -141,7 +136,7 @@ function SignUpModal({ setShowSignUpModal }) {
                 value={signUpState.password}
               />
             </div>
-            <div className="area confirmarea">
+            <div className="signuparea signupconfirmarea">
               <div>
                 Confirm<span>{confirmPasswordMessage}</span>
               </div>
@@ -153,7 +148,7 @@ function SignUpModal({ setShowSignUpModal }) {
                 // value={settingState.username}
               />
             </div>
-            <div className="area namearea">
+            <div className="signuparea signupnamearea">
               <div>
                 Name<span>{nameErrorMessage}</span>
               </div>

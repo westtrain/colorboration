@@ -4,6 +4,8 @@ import axios from "axios";
 import "../styles/SetModal.css";
 import DeleteModal from "./DeleteModal";
 import { PasswordValidation } from "../utils/validation";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faTimes } from "@fortawesome/free-solid-svg-icons";
 
 function SetModal({ setShowSetModal }) {
   const [settingState, setSettingState] = useState({
@@ -95,10 +97,10 @@ function SetModal({ setShowSetModal }) {
     <div className="page">
       <div className="modalback">
         <div className="setmodalview">
-          <div className="headarea " onClick={() => setShowSetModal(false)}>
-            X
+          <div className="setclosed " onClick={() => setShowSetModal(false)}>
+            <FontAwesomeIcon icon={faTimes} size="1x" spin={false} />
           </div>
-          <div className="headarea ">SETTING</div>
+          <div className="setheadarea ">SETTING</div>
           <form onSubmit={onClickSubmit}>
             <div className="setarea namearea">
               <div>

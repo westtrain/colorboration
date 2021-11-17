@@ -1,23 +1,52 @@
 import React, { useState } from "react";
+import { useSelector } from "react-redux";
+import axios from "axios";
+//import { useHistory } from "react-router-dom";
 import "../styles/App.css";
+import MiniSearchBar from "./MiniSearhBar";
 import { ChromePicker } from "react-color";
 
 function Create() {
+  //const history = useHistory();
+  const state = useSelector((state) => state.usersReducer);
   const [showPicker, setShowPicker] = useState(false);
   const [pickerNumber, setPickerNumber] = useState(0);
-  const [colorState, setColorState] = useState({
+  const [createState, setCreateState] = useState({
     color3: "#EEEEEE",
     color2: "#DDDDDD",
     color1: "#CCCCCC",
     color0: "#BBBBBB",
+    tags: [],
+    user_id: null,
   });
+  //state.userInfo.user_info
+  const onClickSubmit = () => {
+    if (createState.tags.length === 0) {
+      alert();
+    } else {
+      axios
+        .post("http://localhost:4000/palettes", createState, {
+          withCredentials: true,
+        })
+        .then((res) => {
+          console.log(res.status);
+          console.log("팔레트 생성을 완료했습니다");
+          //history.push("/");
+        })
+        .catch((error) => {
+          console.log("error", error.response);
+          //if (error.response.status === 402)
+          console.log("팔레트 생성 실패!");
+        });
+    }
+  };
 
   const handleColorPicker = (colorNumber) => {
     if (!showPicker) {
       setShowPicker(true);
     }
     setPickerNumber(colorNumber);
-    console.log(colorState);
+    console.log(createState);
   };
   /* 피커창 닫기
   const closeColorPicker = (e) => {
@@ -39,61 +68,59 @@ function Create() {
               <div
                 className="place c3"
                 onClick={() => handleColorPicker(3)}
-                style={{ background: colorState.color3 }}
+                style={{ background: createState.color3 }}
               ></div>
               <div
                 className="place c2"
                 onClick={() => handleColorPicker(2)}
-                style={{ background: colorState.color2 }}
+                style={{ background: createState.color2 }}
               ></div>
               <div
                 className="place c1"
                 onClick={() => handleColorPicker(1)}
-                style={{ background: colorState.color1 }}
+                style={{ background: createState.color1 }}
               ></div>
               <div
                 className="place c0"
                 onClick={() => handleColorPicker(0)}
-                style={{ background: colorState.color0 }}
+                style={{ background: createState.color0 }}
               ></div>
             </div>
 
-            <div className="addinput">
-              <input></input>
-            </div>
+            <MiniSearchBar />
             <div className="submitpalette">Submit Palette</div>
           </div>
           <div className="colorselectarea">
             <div className="colorselect">
               {showPicker && pickerNumber === 3 ? (
                 <ChromePicker
-                  color={colorState.color3}
+                  color={createState.color3}
                   onChangeComplete={(color) => {
-                    setColorState({ ...colorState, ["color3"]: color.hex });
+                    setCreateState({ ...createState, ["color3"]: color.hex });
                   }}
                 />
               ) : null}
               {showPicker && pickerNumber === 2 ? (
                 <ChromePicker
-                  color={colorState.color2}
+                  color={createState.color2}
                   onChangeComplete={(color) => {
-                    setColorState({ ...colorState, ["color2"]: color.hex });
+                    setCreateState({ ...createState, ["color2"]: color.hex });
                   }}
                 />
               ) : null}
               {showPicker && pickerNumber === 1 ? (
                 <ChromePicker
-                  color={colorState.color1}
+                  color={createState.color1}
                   onChangeComplete={(color) => {
-                    setColorState({ ...colorState, ["color1"]: color.hex });
+                    setCreateState({ ...createState, ["color1"]: color.hex });
                   }}
                 />
               ) : null}
               {showPicker && pickerNumber === 0 ? (
                 <ChromePicker
-                  color={colorState.color0}
+                  color={createState.color0}
                   onChangeComplete={(color) => {
-                    setColorState({ ...colorState, ["color0"]: color.hex });
+                    setCreateState({ ...createState, ["color0"]: color.hex });
                   }}
                 />
               ) : null}

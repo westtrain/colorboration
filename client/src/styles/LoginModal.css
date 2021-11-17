@@ -14,7 +14,7 @@
   place-items: center;
 }
 
-.modalview {
+.loginmodalview {
   background-color: #fff;
   border-radius: 20px;
   width: 400px;
@@ -25,30 +25,30 @@
   animation: modal-show 0.3s;
 }
 
-.closed {
+.loginClosed {
   cursor: pointer;
   font-size: 20px;
   margin: -1.5em 0 -1em 19em;
 }
 
-.headarea {
+.loginHeadarea {
   font-size: 25px;
 }
 
-.area {
+.loginArea {
   display: block;
   color: #7e7c7c;
 }
 
-.emailarea {
-  margin: -1em 0 -1em 0;
+.loginEmailarea {
+  margin: -1em 0 0em 0;
 }
 
-.passwordarea {
-  margin: 0 0 2em 0;
+.loginPasswordarea {
+  margin: 1em 0 2em 0;
 }
 
-.area > div > span {
+.loginArea > div > span {
   height: 12px;
   float: right;
   font-size: 11px;
@@ -85,6 +85,8 @@ input {
 }
 
 .socialloginBtn {
+  width: 50%;
+  height: 25px;
   display: flex;
   border: solid 1px #c4c3c3;
   border-radius: 5px;
@@ -101,13 +103,14 @@ input {
   background-color: #c4c3c3;
 }
 
-.logo {
+.googleLogo {
   padding-right: 10px;
 }
 
 .socialloginBtn > div {
   font-size: 15px;
   color: #7e7c7c;
+  margin-left: 20px;
 }
 
 .checksignup {
