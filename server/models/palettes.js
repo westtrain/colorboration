@@ -1,26 +1,25 @@
 "use strict";
 const { Model } = require("sequelize");
-const { like } = require("sequelize/types/lib/operators");
 
 module.exports = (sequelize, DataTypes) => {
-  class Palettes extends Model {
+  class Palette extends Model {
     static associate(models) {
-      models.Palettes.belongsToMany(models.Users, {
-        through: "Like",
+      models.Palette.belongsToMany(models.User, {
+        through: "Likes",
+        foreignKey: "palette_id",
       });
-      models.Palettes.belongsTo(models.Users, {
+      models.Palette.belongsTo(models.User, {
         foreignKey: "user_id",
         targetKey: "id",
         onDelete: "cascade",
       });
-      models.Palettes.hasMany(models.Tags, {
-        foreignKey: "tag_id",
-        targetKey: "id",
-        onDelete: "cascade",
+      models.Palette.belongsToMany(models.Tag, {
+        through: "Tag_Palette",
+        foreignKey: "palette_id",
       });
     }
   }
-  user.init(
+  Palette.init(
     {
       color1: {
         type: DataTypes.STRING,
@@ -38,12 +37,17 @@ module.exports = (sequelize, DataTypes) => {
         type: DataTypes.STRING,
         allowNull: false,
       },
+      likeCount: {
+        type: DataTypes.INTEGER,
+        allowNull: false,
+      },
     },
     {
       sequelize,
-      modelName: "palettes",
+      modelName: "Palette",
+      tableName: "Palettes",
     }
   );
 
-  return user;
+  return Palette;
 };

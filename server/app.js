@@ -1,51 +1,45 @@
-const express = require('express');
-const cors = require('cors');
-const jwt = require('jsonwebtoken');
-const { authToken } = require('./middleware/token');
-const db = require('./db/connection');
+const express = require("express");
+const cors = require("cors");
+const morgan = require("morgan");
+const cookieParser = require("cookie-parser");
+const helmet = require("helmet");
+const usersRouter = require("./router/users");
+const palettesRouter = require("./router/palettes");
+const authRouter = require("./router/auth");
+const likesRouter = require("./router/like");
+const models = require("./models");
+// const sequelize = require("./models").sequelize;
+// sequelize.sync();
 
 const app = express();
-app.use(express.json());
-const port = 80;
+const port = 4000;
 
+app.use(express.json());
+app.use(cookieParser());
+app.use(helmet());
 app.use(
   cors({
     origin: true,
-    credentials: true
+    credentials: true,
+    methods: ["GET", "POST", "DELETE", "PATCH", "OPTIONS"],
+    Headers: { "content-type": "application/json" },
   })
 );
+app.use(morgan("tiny"));
 
-app.post('/signin', (req, res) => {
-  const { username, password } = req.body;
-  if (username === '김코딩' && password === '1234') {
-    const accessToken = jwt.sign({ username }, 'secretKey', { expiresIn: '1days' });
-    res.status(201).send(accessToken);
-  } else {
-    res.status(401).send('Login Failed');
-  }
+app.use("/users", usersRouter);
+app.use("/palettes", palettesRouter);
+app.use("/likes", likesRouter);
+app.use("/auth", authRouter);
+
+models.sequelize.sync({ force: false }).then(() => {
+  console.log("success models sync");
 });
 
-app.get('/', (req, res) => {
-  res.status(201).send('Hello World');
-});
-
-app.get('/status', authToken, (req, res) => {
-  if (req.username) { // jwt 토큰이 존재할 경우 데이터베이스 연결 여부 조회
-    db.query('use test', (err) => {
-      if (err) {
-        return res.status(200).send({
-          isLogin: true,
-          isConnectedToDatabase: false
-        });
-      }
-      return res.status(200).send({
-        isLogin: true,
-        isConnectedToDatabase: true
-      });
-    });
-  }
+app.get("/", (req, res) => {
+  res.status(201).send("Welcome to Colorboration Server");
 });
 
 app.listen(port, () => {
-  console.log(`서버가 ${port}번에서 작동중입니다.`);
+  console.log(`Server started on Port ${port}.`);
 });

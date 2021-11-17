@@ -2,14 +2,20 @@
 const { Model } = require("sequelize");
 
 module.exports = (sequelize, DataTypes) => {
-  class Users extends Model {
+  class User extends Model {
     static associate(models) {
-      models.Users.belongsToMany(models.Palettes, {
-        through: "Like",
+      models.User.belongsToMany(models.Palette, {
+        through: "Likes",
+        foreignKey: "user_id",
+      });
+      models.User.hasMany(models.Palette, {
+        foreignKey: "user_id",
+        sourceKey: "id",
+        onDelete: "cascade",
       });
     }
   }
-  user.init(
+  User.init(
     {
       email: {
         type: DataTypes.STRING,
@@ -19,21 +25,25 @@ module.exports = (sequelize, DataTypes) => {
         type: DataTypes.STRING,
         allowNull: false,
       },
-
       password: {
         type: DataTypes.STRING,
         allowNull: false,
       },
-      Image: {
+      socialType: {
         type: DataTypes.STRING,
-        allowNull: true, // 나중에 이미지를 넣을 수  있기 때문에...
+        allowNull: false,
+      },
+      image: {
+        type: DataTypes.STRING,
+        allowNull: false,
       },
     },
     {
       sequelize,
-      modelName: "Users",
+      modelName: "User",
+      tableName: "Users",
     }
   );
 
-  return user;
+  return User;
 };
