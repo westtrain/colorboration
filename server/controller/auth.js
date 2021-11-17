@@ -38,7 +38,6 @@ module.exports = {
         socialType,
         //image,
       });
-      // console.log(token);
       return res
         .status(200)
         .cookie("jwt", token, {
@@ -49,7 +48,7 @@ module.exports = {
           // domain: ".color-boration.tk",
           domain: "localhost",
         })
-        .json({ data: loginUserInfo });
+        .json({ token, data: loginUserInfo });
     } catch (err) {
       console.log(err);
       return res.status(500).json({ message: "Server Error" });
