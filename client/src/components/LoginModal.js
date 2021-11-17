@@ -45,15 +45,6 @@ function LoginModal({ setShowLoginModal, setShowSignUpModal }) {
   const onClickLogin = (e) => {
     e.preventDefault();
 
-    const getToken = async () => {
-      const token = localStorage.getItem("accessToken");
-      if (token) {
-        return `Bearer ${token}`;
-      } else {
-        return null;
-      }
-    };
-
     if (!(email !== "" && password !== "")) {
       setEmailErrorMessage("이메일을 입력하세요");
       setPasswordErrorMessage("비밀번호를 입력하세요");
@@ -63,16 +54,13 @@ function LoginModal({ setShowLoginModal, setShowSignUpModal }) {
       // 유효성 검사 통과 후 로그인 요청
       axios
         .post("http://localhost:4000/auth/login", loginState, {
-          headers: {
-            Authorization: getToken(),
-          },
+          withCredentials: true,
         })
         .then((response) => {
           console.log("response", response.data);
-          const accessToken = getToken(); //Local Storage에 저장된 토큰 accessToken에 할당
+          const accessToken = response.data.token; //Local Storage에 저장된 토큰 accessToken에 할당
           dispatch(handleLogin(accessToken)); //store state에 accessToken 저장
-          console.log(accessToken);
-          isAuthenticated();
+          isAuthenticated(accessToken);
         })
         .catch((error) => {
           console.log("error", error.response);
@@ -82,26 +70,17 @@ function LoginModal({ setShowLoginModal, setShowSignUpModal }) {
     }
 
     // 인증 성공 후, 사용자 정보를 호출. 성공하면 로그인 여부 state 업데이트
-    const isAuthenticated = () => {
+    const isAuthenticated = (token) => {
       axios
         .get("http://localhost:4000/users", {
           headers: {
-            Authorization: localStorage.getItem(state.accessToken),
+            Authorization: token,
           },
           withCredentials: true,
         })
         .then((res) => {
           console.log(res);
           dispatch(handleLoginSuccess(res.data.data));
-        })
-        .then((res) => {
-          console.log(res.status);
-          if (res.status === 401) {
-            setEmailErrorMessage("아이디 또는 비밀번호가 잘못 입력 되었습니다");
-            setPasswordErrorMessage("아이디와 비밀번호를 정확히 입력해 주세요");
-          }
-
-          console.log(res);
           console.log("로그인을 완료했습니다");
           setShowLoginModal();
         });

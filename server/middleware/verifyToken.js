@@ -4,8 +4,9 @@ require("dotenv").config();
 
 const isAuth = (req, res, next) => {
   // const token = req.cookies["jwt"];
-  const token = req.headers.cookie;
-  // console.log(req.headers.cookie);
+  console.log(req.headers.cookie.slice(4));
+  const token = req.headers.cookie.slice(4);
+
   if (!token) {
     return res.status(401).json({ message: "Unauthorized Request no token" });
   }

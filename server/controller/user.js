@@ -11,6 +11,7 @@ const {
 
 module.exports = {
   getUser: async (req, res) => {
+    console.log(req.headers.Authorization);
     // 1. Cookie 를 이용해서 ( req.userId ) 유저정보를 가져온다.
     const userInfo = await User.findOne({
       attributes: ["id", "email", "name", "socialType", "image"],
