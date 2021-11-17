@@ -4,7 +4,7 @@ import { useDispatch, useSelector } from "react-redux";
 import "../styles/App.css";
 import Tag from "./Tag";
 
-function SearchBar() {
+function MiniSearchBar() {
   const arr = Array.from({ length: 20 }, () => 0);
   const [showDropdown, setShowDropdown] = useState(false);
   const [tags, setTags] = useState([]);
@@ -26,21 +26,8 @@ function SearchBar() {
 
   return (
     <>
-      <div className="inputContainer flex" onClick={handledropdown}>
-        <input
-          className=""
-          placeholder="Search palettes. 최대 3개의 태그 검색이 가능합니다"
-          value={tags}
-          readonly
-        />
-        {/* <input placeholder="Search palettes" onKeyUp="showTags()" /> */}
-        <div className="searchIcon icon" icon="search"></div>
-        <a className="clear" onClick={() => handleClear()}>
-          ✕
-        </a>
-      </div>
       {showDropdown ? (
-        <div className="filterWindow dropdown hidden card ">
+        <div className="createpaletteSearch ">
           <div className="color section">
             <div className="title">Colors</div>
             <div className="line"></div>
@@ -68,10 +55,22 @@ function SearchBar() {
               })}
             </div>
           </div>
+
+          <div className="related section hide">
+            <div className="title">Related</div>
+          </div>
         </div>
       ) : null}
+      <div className="addinput" onClick={handledropdown}>
+        <input className="" placeholder="Search Tags" value={tags} readonly />
+        {/* <input placeholder="Search palettes" onKeyUp="showTags()" /> */}
+        <div className="searchIcon icon" icon="search"></div>
+        <a className="minisearchclear" onClick={() => handleClear()}>
+          ✕
+        </a>
+      </div>
     </>
   );
 }
 
-export default SearchBar;
+export default MiniSearchBar;

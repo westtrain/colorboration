@@ -1,5 +1,5 @@
 export const initialState = {
-  isLogin: false,
+  isLogin: true,
   userInfo: null,
   accessToken: "",
 };

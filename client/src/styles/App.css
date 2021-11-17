@@ -47,7 +47,7 @@ input {
   background: #fff;
   border: 1px solid #ececec;
   border-radius: 10px;
-  height: 38px;
+  height: 30px;
   font-size: 14px;
   box-sizing: border-box;
   flex-shrink: 0;
@@ -60,7 +60,7 @@ input {
 }
 .button {
   cursor: pointer;
-  padding: 0 14px;
+  padding: 0 10px;
 }
 .button:after {
   content: " ";
@@ -101,6 +101,9 @@ input {
   background-repeat: no-repeat;
   background-position-y: 50%;
   background-position-x: 0;
+}
+.button > span {
+  margin-left: 5px;
 }
 .icon[icon="new"] {
   background-position-x: -30px;
@@ -304,6 +307,7 @@ input {
 .left {
   min-width: 200px;
 }
+
 .right {
   min-width: 260px;
   max-width: 260px;
@@ -312,10 +316,11 @@ input {
 }
 .rightHeader {
   height: 30px;
-  max-width: 260px;
+  width: 370px;
   display: flex;
 }
 .create {
+  cursor: pointer;
   font-size: 20px;
   font-weight: 400;
   margin: 0 30px;
@@ -439,6 +444,7 @@ input {
 .filterContainer {
   display: inline-block;
   position: relative;
+  margin-left: -2em;
 }
 .filterContainer .searchIcon {
   position: absolute;
@@ -642,6 +648,7 @@ input {
   border-radius: 10px 10px 0 0;
 }
 .timeframe {
+  display: block;
   border: 1px solid #ececec;
   border-radius: 0 0 10px 10px;
   margin-top: -6px;
@@ -652,6 +659,7 @@ input {
   padding: 4px;
   background-color: #fff;
 }
+
 .timeframe .button {
   opacity: 0.6;
   margin: 2px;
@@ -742,6 +750,7 @@ input {
   display: block;
   margin-bottom: 14px;
   overflow: hidden;
+  cursor: pointer;
 }
 .palette a {
   width: 100%;
@@ -1253,8 +1262,10 @@ h2 {
   display: block;
   font-size: 25px;
 }
-
+/* 수정 */
 .setButton {
+  cursor: pointer;
+  font-size: 20px;
   margin: 10px 0 0 5px;
 }
 
@@ -1277,25 +1288,34 @@ h2 {
 }
 
 .mypalettesarea {
-  border-top: solid rgb(10, 10, 10);
+  border-top: 1px solid rgb(206, 204, 204);
 }
 
 .historyarea {
-  border-top: solid rgb(10, 10, 10);
+  border-top: 1px solid rgb(206, 204, 204);
 }
-
+/* 수정 */
 .profilelike,
 .history,
 .mypalettes {
+  color: rgb(136, 134, 134);
   min-width: 150px;
-  padding: 0;
+  padding-top: 7px;
   font-size: 25px;
-  font-weight: bolder;
   font-style: inherit;
 }
 
 .moreView {
-  padding-top: 5%;
+  color: rgb(136, 134, 134);
+  cursor: pointer;
+  display: flex;
+  font-size: 23px;
+  padding-top: 9%;
+}
+
+.moreView > div {
+  margin-top: -10%;
+  margin-left: 10px;
 }
 /* create */
 
@@ -1326,6 +1346,7 @@ h2 {
 
 .addinput {
   margin: 1em 0 2em 0;
+  display: flex;
 }
 
 .addinput > input {
@@ -1394,6 +1415,7 @@ h2 {
 
 .hexcode {
   text-align: center;
+  cursor: pointer;
 }
 
 .rgbcode {
@@ -1406,12 +1428,12 @@ h2 {
   height: 10em;
 }
 /* colorPIcker */
-
+/* 수정 */
 .colorselect {
   width: 25em;
   height: 25em;
 
-  margin: 10em 0 0 105em;
+  margin: 10em 0 0 86em;
 }
 
 .colorpicker {
@@ -1427,7 +1449,7 @@ h2 {
   position: relative;
   display: inline-block;
   border-radius: 200px;
-  margin-right: 15px;
+  margin-left: 25px;
 }
 
 /* tag */
@@ -1441,12 +1463,13 @@ h2 {
   width: auto;
   margin: 1em 1.6em 1em 0;
   padding: 0 12px 0 12px;
-  height: 50px;
+  height: 30px;
   font-size: 14px;
   box-sizing: border-box;
   align-items: center;
   justify-content: center;
   text-align: center;
+  cursor: pointer;
 }
 
 .tag > div {
@@ -1470,7 +1493,7 @@ h2 {
 
 .palettePageitem {
   width: 100%;
-  margin: 5em 10em 0 0;
+  margin: 5em 5em 0 0;
 }
 
 .colorarr {
@@ -1495,7 +1518,7 @@ h2 {
 
   height: 80%;
 
-  border-bottom: 1px solid #1b1b1b;
+  border-bottom: 1px solid #c9c8c8;
 }
 
 .radiuscolor {
@@ -1511,19 +1534,86 @@ h2 {
 }
 
 .hexcode {
+  padding: 15px 0 15px 0;
+  font-size: 15px;
+  font-weight: bolder;
   text-align: center;
+  border-bottom: 1px solid #c9c8c8;
 }
 
 .rgbcode {
+  padding: 15px 0 0 0;
   text-align: center;
   font-size: 13px;
 }
 
 .tagcollection {
   display: flex;
-  margin-top: 2em;
+  margin-top: 6em;
 }
 
+.buttonlike {
+  background: #fff;
+  border: 1px solid #ececec;
+  border-radius: 15px;
+  width: 50px;
+  height: 30px;
+  font-size: 14px;
+  box-sizing: border-box;
+  flex-shrink: 0;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+  overflow: hidden;
+  transition: color 0.2s, opacity 0.2s;
+  cursor: pointer;
+}
+
+.buttonlike > span {
+  margin-left: 3px;
+}
 .buttonlink {
-  margin-left: 4em;
+  margin-left: 2em;
+  background: #fff;
+  border: 1px solid #ececec;
+  border-radius: 15px;
+  width: 50px;
+  height: 30px;
+  font-size: 14px;
+  box-sizing: border-box;
+  flex-shrink: 0;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+  overflow: hidden;
+  transition: color 0.2s, opacity 0.2s;
+  cursor: pointer;
+}
+.buttonlink > span {
+  margin-left: 3px;
+}
+
+/* MiniSearchBar */
+
+.createpaletteSearch {
+  padding: 20px 0 0 40px;
+  background-color: #fff;
+  border: 1px solid #ebe9e9;
+
+  position: absolute;
+  border-radius: 0 0 10px 10px;
+  transition: all 0.2s;
+  transform-origin: top;
+  z-index: 2;
+  margin-top: -630px;
+}
+
+.minisearchclear {
+  cursor: pointer;
+  font-size: 20px;
+  padding-top: 10px;
+  margin-left: -25px;
+  z-index: 2;
 }

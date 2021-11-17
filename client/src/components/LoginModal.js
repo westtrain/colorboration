@@ -83,6 +83,11 @@ function LoginModal({ setShowLoginModal, setShowSignUpModal }) {
           dispatch(handleLoginSuccess(res.data.data));
           console.log("로그인을 완료했습니다");
           setShowLoginModal();
+        })
+        .catch((error) => {
+          console.log("userinfo error", error.response);
+          setEmailErrorMessage("아이디 또는 비밀번호가 잘못 입력 되었습니다");
+          setPasswordErrorMessage("아이디와 비밀번호를 정확히 입력해 주세요");
         });
     };
   };
@@ -90,18 +95,18 @@ function LoginModal({ setShowLoginModal, setShowSignUpModal }) {
   return (
     <div className="page">
       <div className="modalback">
-        <div className="modalview">
+        <div className="loginmodalview">
           <div
-            className="headarea"
+            className="loginClosed"
             onClick={() => {
               setShowLoginModal(false);
             }}
           >
             <FontAwesomeIcon icon={faTimes} size="1x" spin={false} />
           </div>
-          <div className="headarea">LOGIN</div>
+          <div className="loginHeadarea">LOGIN</div>
           <form onSubmit={onClickLogin}>
-            <div className="area emailarea">
+            <div className="loginArea loginEmailarea">
               <div>
                 Email
                 <span>{emailErrorMessage}</span>
@@ -115,7 +120,7 @@ function LoginModal({ setShowLoginModal, setShowSignUpModal }) {
                 value={loginState.email}
               />
             </div>
-            <div className="area passwordarea">
+            <div className="loginArea loginPasswordarea">
               <div>
                 Password<span>{passwordErrorMessage}</span>
               </div>
@@ -134,7 +139,7 @@ function LoginModal({ setShowLoginModal, setShowSignUpModal }) {
           </form>
           <button className="socialloginBtn">
             <img
-              className="logo"
+              className="googolelogo"
               width="20px"
               height="20px"
               src="https://pbs.twimg.com/profile_images/770139154898382848/ndFg-IDH_400x400.jpg"
