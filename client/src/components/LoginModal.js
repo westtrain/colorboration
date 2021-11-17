@@ -71,6 +71,7 @@ function LoginModal({ setShowLoginModal, setShowSignUpModal }) {
           console.log("response", response.data);
           const accessToken = getToken(); //Local Storage에 저장된 토큰 accessToken에 할당
           dispatch(handleLogin(accessToken)); //store state에 accessToken 저장
+          console.log(accessToken);
           isAuthenticated();
         })
         .catch((error) => {
