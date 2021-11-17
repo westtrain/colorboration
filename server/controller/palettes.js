@@ -1,5 +1,5 @@
 const db = require("../models");
-const { Palette, sequelize } = require("../models");
+const { Palette, Tag_Palette, sequelize } = require("../models");
 const { Op, literal } = require("sequelize");
 const moment = require("moment");
 
@@ -140,17 +140,24 @@ module.exports = {
   },
   createPalette: async (req, res) => {
     const userId = req.userId;
-    // 1. color1, color2, color3, color4를 클라이언트에서 받아온다.
-    const { color1, color2, color3, color4 } = req.body;
+    // 1. color0, color1, color2, color3를 클라이언트에서 받아온다.
+    const { color0, color1, color2, color3, tags } = req.body;
     try {
-      if (color1 && color2 && color3 && color4) {
+      if (color0 && color1 && color2 && color3) {
         await Palette.create({
+          color0: color0,
           color1: color1,
           color2: color2,
           color3: color3,
-          color4: color4,
           user_id: userId,
           likeCount: 0,
+        }).then((data) => {
+          for (let i = 0; i < tags.length; i++) {
+            db.sequelize.models.Tag_Palette.create({
+              palette_id: data.id,
+              tag_id: tags[i],
+            });
+          }
         });
         return res.sendStatus(200);
       }

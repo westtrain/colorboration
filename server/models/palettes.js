@@ -21,6 +21,10 @@ module.exports = (sequelize, DataTypes) => {
   }
   Palette.init(
     {
+      color0: {
+        type: DataTypes.STRING,
+        allowNull: false,
+      },
       color1: {
         type: DataTypes.STRING,
         allowNull: false,
@@ -30,10 +34,6 @@ module.exports = (sequelize, DataTypes) => {
         allowNull: false,
       },
       color3: {
-        type: DataTypes.STRING,
-        allowNull: false,
-      },
-      color4: {
         type: DataTypes.STRING,
         allowNull: false,
       },
