@@ -49,16 +49,20 @@ function SignUpModal({ setShowSignUpModal }) {
     }
   };
 
-  const onClickSubmit = (e) => {
-    e.preventDefault();
+  const onClickSubmit = () => {
+    console.log("===============");
     if (!PasswordValidation(password)) {
       // 패스워드 유효성 검사
+      console.log("~~~~~~~~~0");
       setPasswordErrorMessage("특수문자 포함 6자 이상");
+      console.log("~~~~~~~~~q1");
     } else if (!EmailValidation(email)) {
       setEmailErrorMessage("이메일 형식이 올바르지 않습니다");
+      console.log("~~~~~~~~~2");
     } else if (name !== "" && isValidPassword) {
       // confirm 비밀번호 일치 확인
       // 유저네임 중복 확인
+      console.log("~~~~~~~~~3");
       axios
         .post(
           "http://localhost:4000/auth/name",
@@ -145,7 +149,6 @@ function SignUpModal({ setShowSignUpModal }) {
                 onChange={onChangeSignUpState}
                 name="confirmpassword"
                 required
-                // value={settingState.username}
               />
             </div>
             <div className="signuparea signupnamearea">
@@ -155,12 +158,14 @@ function SignUpModal({ setShowSignUpModal }) {
               <input
                 type="text"
                 onChange={onChangeSignUpState}
-                name="userName"
+                name="name"
                 required
-                value={signUpState.userName}
+                value={signUpState.name}
               />
             </div>
-            <button className="signup">SIGN UP</button>
+            <button type="submit" className="signup">
+              SIGN UP
+            </button>
           </form>
         </div>
       </div>

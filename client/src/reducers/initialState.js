@@ -1,5 +1,20 @@
 export const initialState = {
-  isLogin: true,
+  isLogin: false,
   userInfo: null,
   accessToken: "",
+  tags: [
+    { name: "Red", isColorTag: 1, id: 1 },
+    { name: "Orange", isColorTag: 1, id: 2 },
+    { name: "Yellow", isColorTag: 1, id: 3 },
+    { name: "Green", isColorTag: 1, id: 4 },
+    { name: "Blue", isColorTag: 1, id: 5 },
+    { name: "Navy", isColorTag: 1, id: 6 },
+    { name: "Purple", isColorTag: 1, id: 7 },
+    { name: "Warm", isColorTag: 0, id: 8 },
+    { name: "Cool", isColorTag: 0, id: 9 },
+    { name: "Spring", isColorTag: 0, id: 10 },
+    { name: "Summer", isColorTag: 0, id: 11 },
+    { name: "Fall", isColorTag: 0, id: 12 },
+    { name: "WInter", isColorTag: 0, id: 13 },
+  ],
 };

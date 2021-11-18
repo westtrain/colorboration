@@ -18,11 +18,12 @@ function LoginModal({ setShowLoginModal, setShowSignUpModal }) {
   const [passwordErrorMessage, setPasswordErrorMessage] = useState("");
   const dispatch = useDispatch();
   const state = useSelector((state) => state.usersReducer);
+  //const isLogin = useSelector((state) => state.isLogin);
+  console.log("~~~`", state);
 
   const onChangeLoginState = (e) => {
     const { name, value } = e.target;
     setLoginState({ ...loginState, [name]: value }); //로그인 정보 state 업데이트
-
     //email 유효성 검사 후 에러 메세지 설정
     if (name === "email") {
       if (value !== "" && EmailValidation(value)) {
@@ -44,7 +45,6 @@ function LoginModal({ setShowLoginModal, setShowSignUpModal }) {
 
   const onClickLogin = (e) => {
     e.preventDefault();
-
     if (!(email !== "" && password !== "")) {
       setEmailErrorMessage("이메일을 입력하세요");
       setPasswordErrorMessage("비밀번호를 입력하세요");
@@ -81,7 +81,6 @@ function LoginModal({ setShowLoginModal, setShowSignUpModal }) {
         .then((res) => {
           console.log(res);
           dispatch(handleLoginSuccess(res.data.data));
-          console.log("로그인을 완료했습니다");
           setShowLoginModal();
         })
         .catch((error) => {

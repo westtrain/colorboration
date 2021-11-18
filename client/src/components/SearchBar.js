@@ -1,36 +1,44 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
-import { useDispatch, useSelector } from "react-redux";
+import { useSelector } from "react-redux";
 import "../styles/App.css";
 import Tag from "./Tag";
 
 function SearchBar() {
   const arr = Array.from({ length: 20 }, () => 0);
   const [showDropdown, setShowDropdown] = useState(false);
-  const [tags, setTags] = useState([]);
+  const [tagsId, setTagsId] = useState([]); //tag 아이디 저장
+  const [tagsName, setTagsName] = useState([]); //tag name 저장
   const color = "#FFE652";
+  const state = useSelector((state) => state.usersReducer);
 
   const handledropdown = () => {
     setShowDropdown(!showDropdown);
   };
 
   const handleClear = () => {
-    setTags([]);
+    setTagsId([]);
+    setTagsName([]);
   };
 
-  const addTags = (tagColor) => {
-    if (!tags.includes(tagColor)) {
-      setTags([...tags, tagColor]);
+  const addTags = (tag) => {
+    if (!tagsId.includes(tag.id)) {
+      setTagsId([...tagsId, tag.id]);
+      setTagsName([...tagsName, tag.name]);
     }
   };
+
+  const getTags = () => {};
+
+  useEffect(() => {}, []);
 
   return (
     <>
       <div className="inputContainer flex" onClick={handledropdown}>
         <input
           className=""
-          placeholder="Search palettes. 최대 3개의 태그 검색이 가능합니다"
-          value={tags}
+          placeholder="Search palettes."
+          value={tagsName}
           readonly
         />
         {/* <input placeholder="Search palettes" onKeyUp="showTags()" /> */}
@@ -38,6 +46,7 @@ function SearchBar() {
         <a className="clear" onClick={() => handleClear()}>
           ✕
         </a>
+        <a className="searchStart">Search</a>
       </div>
       {showDropdown ? (
         <div className="filterWindow dropdown hidden card ">
@@ -45,12 +54,14 @@ function SearchBar() {
             <div className="title">Colors</div>
             <div className="line"></div>
             <div className="colorsTag">
-              {arr.map((v, i) => {
-                return (
-                  <div>
-                    <Tag color={color} addTags={addTags} key={i} />
-                  </div>
-                );
+              {state.tags.map((tag, i) => {
+                if (tag.isColorTag) {
+                  return (
+                    <div>
+                      <Tag tag={tag} addTags={addTags} key={i} />
+                    </div>
+                  );
+                }
               })}
             </div>
           </div>
@@ -59,12 +70,14 @@ function SearchBar() {
             <div className="title">Collections</div>
             <div className="line"></div>
             <div className="colorsTag">
-              {arr.map((v, i) => {
-                return (
-                  <div>
-                    <Tag addTags={addTags} key={i} />
-                  </div>
-                );
+              {state.tags.map((tag, i) => {
+                if (!tag.isColorTag) {
+                  return (
+                    <div>
+                      <Tag tag={tag} addTags={addTags} key={i} />
+                    </div>
+                  );
+                }
               })}
             </div>
           </div>
