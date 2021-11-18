@@ -3,7 +3,7 @@ import "../styles/App.css";
 import { CopyToClipboard } from "react-copy-to-clipboard";
 import { Link, useNavigate } from "react-router-dom";
 
-function Palette({ isPaletttePage }) {
+function Palette({ palette, isPaletttePage }) {
   const navigate = useNavigate();
 
   const handleClickPalette = () => {

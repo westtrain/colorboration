@@ -1,18 +1,23 @@
 import React from "react";
 import "../styles/App.css";
 
-function Tag({ color, addTags }) {
-  const isColorTag = true;
-  return (
-    <button className="tag" onClick={() => addTags("#FFE652")}>
-      {isColorTag ? (
-        <div className="tagcolor" style={{ background: color, color: color }}>
-          x
-        </div>
-      ) : null}
-      tag
-    </button>
-  );
+function Tag({ tag, addTags }) {
+  if (tag !== undefined) {
+    const { name, isColorTag, id } = tag;
+
+    return (
+      <button className="tag" onClick={() => addTags(tag)}>
+        {isColorTag ? (
+          <div className="tagcolor" style={{ background: name, color: name }}>
+            x
+          </div>
+        ) : null}
+        {name}
+      </button>
+    );
+  } else {
+    return <></>;
+  }
 }
 
 export default Tag;

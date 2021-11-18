@@ -11,8 +11,10 @@ const usersReducer = (state = initialState, action) => {
       });
       break;
     case HANDLE_LOGIN_SUCCESS:
+      console.log(action.payload, "=====");
       return Object.assign({}, state, {
         userInfo: action.payload.userInfo,
+        isLogin: true,
       });
       break;
     default:
