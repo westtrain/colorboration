@@ -648,16 +648,19 @@ input {
   border-radius: 10px 10px 0 0;
 }
 .timeframe {
-  display: block;
+  display: flex;
+  width: 120px;
   border: 1px solid #ececec;
   border-radius: 0 0 10px 10px;
   margin-top: -6px;
+  margin-left: 10px;
   box-sizing: border-box;
   margin-bottom: 10px;
   cursor: pointer;
   flex-direction: column;
-  padding: 4px;
+  padding: 4px 0 4px 0;
   background-color: #fff;
+  text-align: center;
 }
 
 .timeframe .button {
@@ -1250,6 +1253,7 @@ h2 {
 }
 
 .editButton > button {
+  cursor: pointer;
   color: #fff;
   width: 3.5em;
   border: none;
@@ -1449,7 +1453,7 @@ h2 {
   position: relative;
   display: inline-block;
   border-radius: 200px;
-  margin-left: 25px;
+  margin-left: -10px;
 }
 
 /* tag */
@@ -1492,8 +1496,8 @@ h2 {
 /* palettePage */
 
 .palettePageitem {
-  width: 100%;
-  margin: 5em 5em 0 0;
+  width: 45em;
+  margin: 5em 0 0 0;
 }
 
 .colorarr {
@@ -1620,11 +1624,20 @@ h2 {
 
 /* searchStart */
 .searchStart {
+  cursor: pointer;
   margin-left: 20px;
   margin-right: 10px;
   font-size: 20px;
+  color: rgb(179, 176, 176);
 }
 /* font */
 .logo > .mobileHide {
   font-family: "Schoolbell", cursive;
+}
+
+/* logout */
+
+.logoutProfile {
+  display: flex;
+  margin: 0 20px 0 -35px;
 }
