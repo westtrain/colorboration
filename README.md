@@ -5,7 +5,7 @@
 <br>
 <br>
 
-## 모든 창작의 시작, Colorboration
+## 모든 창작의 시작, Colorboration🎨
 
 <br>
 
@@ -13,12 +13,12 @@ Colorboration(컬러보레이션)은 누구나 자유롭게 컬러를 조합해 
 
 원하는 테마 태그, 컬러 태그를 선택해서 팔레트를 찾을 수 있습니다.
 
-컬러 선택이 고민된다면 **Colorboration**과 함께 해보세요!👩‍🎨
+컬러 선택이 고민된다면 **Colorboration**과 함께 해보세요!
 
 <br>
 <br>
 
-## 디자이너들의 컬러 조력자, Colorboration에서는... 🎨
+## 디자이너들의 컬러 조력자, Colorboration에서는... 👩‍🎨
 
 - 다양한 컬러들로 특별한 나만의 팔레트를 만들 수 있어요.
 - 다양한 유저들의 팔레트도 태그별로 필터링하여 조회할 수 있어요.
@@ -30,7 +30,7 @@ Colorboration(컬러보레이션)은 누구나 자유롭게 컬러를 조합해 
 <br>
 <br>
 
-### 👉 [Colorboration 사용해보기](https://colorboration.tk/) 👈
+### 👉 [Colorboration 사용해보기](https://color-boration.tk/) 👈
 
 <br>
 <br>
@@ -132,8 +132,6 @@ Teletubbies(텔레토비)는 알록달록한 아이디어가 가득한 사람들
 
 # 🎈 More Info
 
-🚀 [배포 사이트](https://sweatmate.club)
-
-🍀 [프로젝트 소개 문서](https://www.notion.so/9-Let-s-Sweatmate-89fc72c3899a425caebdf0eb02695514)
+🚀 [배포 사이트](https://color-boration.tk)
 
 📖 [위키](https://github.com/codestates/Colorboration/wiki)
