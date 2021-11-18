@@ -8,6 +8,7 @@ const palettesRouter = require("./router/palettes");
 const authRouter = require("./router/auth");
 const likesRouter = require("./router/like");
 const models = require("./models");
+// const seeds = require("./seeders");
 // const sequelize = require("./models").sequelize;
 // sequelize.sync();
 
@@ -32,10 +33,13 @@ app.use("/palettes", palettesRouter);
 app.use("/likes", likesRouter);
 app.use("/auth", authRouter);
 
-models.sequelize.sync({ force: false }).then(() => {
+models.sequelize.sync({ force: true }).then(() => {
   console.log("success models sync");
 });
-
+// console.log(seeds);
+// seeds.sequelize.sync({ force: true }).then(() => {
+//   console.log("success seeds sync");
+// });
 app.get("/", (req, res) => {
   res.status(201).send("Welcome to Colorboration Server");
 });
