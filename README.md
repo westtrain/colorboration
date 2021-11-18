@@ -42,79 +42,7 @@ Colorboration(컬러보레이션)은 누구나 자유롭게 컬러를 조합해 
 <br>
 <br>
 
-# 🔥 Final Web View
 
-<details>
-<summary>랜딩 페이지</summary>
-<div markdown="1">       
-<br>
-    gif 넣기
-<br>
-<br>
-
-</div>
-</details>
-
-<details>
-<summary>홈</summary>
-<div markdown="1">       
-<br>
-    <ul>
-        🏡 홈 - 리스트 뷰
-
-        🏡 홈 - 검색 기능
-
-    </ul>
-
-</div>
-
-</details>
-
-<details>
-<summary>마이페이지</summary>
-<div markdown="1">       
-<br>
-    <ul>
-        ✍🏻 전체 리스트 뷰
-        <br>
-        <img src="https://user-images.githubusercontent.com/13115713/141735217-b8d59d37-88a9-4728-a1a3-71ea520dbd68.gif" width="550">
-        <img src="https://user-images.githubusercontent.com/13115713/141735200-484bced7-5199-4109-a33f-9164435558aa.gif" width="210">
-        <br>
-        <br>
-        ❌ 유저 계정 삭제
-        <br>
-        <img src="https://user-images.githubusercontent.com/13115713/141804165-81779861-944e-47c1-a159-3dc2ed593d9f.gif" width="550">
-        <img src="https://user-images.githubusercontent.com/13115713/141804140-1a366f12-aa5c-447d-a6c4-01b4fb929541.gif" width="210">
-        <br>
-    </ul>
-</div>
-</details>
-
-<details>
-<summary>로그인 & 회원가입</summary>
-<div markdown="1">       
-<br>
-    <ul>
-        회원가입
-        <br>
-        <img src="https://user-images.githubusercontent.com/13115713/141735414-ece62801-dae1-4af4-897e-c1dc261ed3ef.gif" width="210">
-        <br>
-        <br>
-        로그인
-        <br>
-        <img src="https://user-images.githubusercontent.com/13115713/141735396-b8ceb00d-db8d-4a5b-ac37-feade828e4d5.gif" width="210">
-        <br>
-        <br>
-        소셜 로그인
-        <br>
-        <img src="https://user-images.githubusercontent.com/13115713/141735412-678fa93d-efd0-4892-908b-8e6932ded271.gif" width="210">
-        <br>
-    </ul>
-</div></details>
-</details>
-
-<br>
-<br>
 
 # 🧑‍💻 Team (Teletubbies)
 
