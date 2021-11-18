@@ -1617,3 +1617,14 @@ h2 {
   margin-left: -25px;
   z-index: 2;
 }
+
+/* searchStart */
+.searchStart {
+  margin-left: 20px;
+  margin-right: 10px;
+  font-size: 20px;
+}
+/* font */
+.logo > .mobileHide {
+  font-family: "Schoolbell", cursive;
+}
