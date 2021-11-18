@@ -6,6 +6,7 @@ import { closeLoginModal, openLoginModal } from "../actions/index";
 import LoginModal from "./LoginModal";
 import SignUpModal from "./SignUpModal";
 import SearchBar from "./SearchBar";
+import ColorborationLogo from "../logo.png";
 
 function Header() {
   const [showLoginModal, setShowLoginModal] = useState(false);
@@ -31,8 +32,14 @@ function Header() {
           <div className="left">
             <Link to="/">
               <a className="logo flex">
-                <img src="../logo.png" className="tongue" alt="logo" />
-                <span className="mobileHide">Colorboration</span>
+                <img
+                  src={ColorborationLogo}
+                  className="tongue"
+                  alt="logo"
+                  width="40px"
+                  height="40px"
+                />
+                <span className="mobileHide pagename">Colorboration</span>
               </a>
             </Link>
           </div>

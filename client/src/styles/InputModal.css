@@ -1,0 +1,104 @@
+.page {
+  display: flex;
+}
+
+.modalback {
+  position: fixed;
+  z-index: 999;
+  top: 0;
+  right: 0;
+  left: 0;
+  bottom: 0;
+  background-color: rgba(0, 0, 0, 0.4);
+  display: grid;
+  place-items: center;
+}
+
+.inputmodalview {
+  background-color: #fff;
+  border-radius: 20px;
+  width: 280px;
+  height: 260px;
+  display: grid;
+  place-items: center;
+  padding: 20px 25px 15px 25px;
+  text-align: center;
+}
+
+.inputheadarea {
+  font-size: 30px;
+}
+
+.checkinput {
+  color: #7a7878;
+  font-size: 20px;
+  width: 240px;
+}
+
+.checkinput > input {
+  width: 240px;
+  margin-left: -5px;
+  padding-top: 4px;
+}
+
+.cancel {
+  background-color: rgb(179, 178, 248);
+  width: 120px;
+  height: 30px;
+  font-size: 20px;
+  color: #fff;
+  text-align: center;
+  border-radius: 5px;
+  border: #fff;
+  margin-right: 5px;
+}
+
+.delete {
+  background-color: rgb(243, 144, 144);
+  width: 120px;
+  height: 30px;
+  font-size: 20px;
+  color: #fff;
+  text-align: center;
+  border-radius: 5px;
+  border: #fff;
+  margin-left: 5px;
+}
+
+.cancel:hover {
+  background-color: rgb(211, 211, 248);
+}
+
+.cancel:active {
+  background-color: rgb(164, 164, 248);
+}
+
+.delete:hover {
+  background-color: rgb(243, 170, 170);
+}
+
+.delete:active {
+  background-color: rgb(236, 89, 89);
+}
+
+@media screen and (max-width: 1025px) {
+  .feed {
+    margin: 0 2.5em 0 2.5em;
+  }
+
+  .item {
+    width: calc(33.33333% - 1.25em);
+    margin: 1.25em 0 0 1.25em;
+  }
+}
+
+@media screen and (max-width: 725px) {
+  .feed {
+    margin: 0 1.25em 0 1.25em;
+  }
+
+  .item {
+    width: calc(50% - 1.25em);
+    margin: 1.25em 0 0 1.25em;
+  }
+}
