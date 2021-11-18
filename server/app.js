@@ -7,6 +7,7 @@ const usersRouter = require("./router/users");
 const palettesRouter = require("./router/palettes");
 const authRouter = require("./router/auth");
 const likesRouter = require("./router/like");
+const tagsRouter = require("./router/tags");
 const models = require("./models");
 // const sequelize = require("./models").sequelize;
 // sequelize.sync();
@@ -31,6 +32,7 @@ app.use("/users", usersRouter);
 app.use("/palettes", palettesRouter);
 app.use("/likes", likesRouter);
 app.use("/auth", authRouter);
+app.use("/tags", tagsRouter);
 
 models.sequelize.sync({ force: false }).then(() => {
   console.log("success models sync");
