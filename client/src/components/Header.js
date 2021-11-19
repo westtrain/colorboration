@@ -6,7 +6,7 @@ import { setShowLoginModal } from "../actions/index";
 import LoginModal from "./LoginModal";
 import SignUpModal from "./SignUpModal";
 import SearchBar from "./SearchBar";
-import ColorborationLogo from "../logo.png";
+//import ColorborationLogo from "../Colorboration_logo.jpg";
 
 function Header() {
   //const [showLoginModal, setShowLoginModal] = useState(false);
@@ -72,7 +72,9 @@ function Header() {
             </span>
           ) : (
             <div className="logoutProfile">
-              <span className="create mobileHide">LOGOUT</span>
+              <span className="create mobileHide" onClick={() => {}}>
+                LOGOUT
+              </span>
               <Link to="mypage">
                 <img
                   className="miniuserphoto"

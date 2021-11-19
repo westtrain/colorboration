@@ -151,14 +151,7 @@ module.exports = {
           color3: color3,
           user_id: userId,
           likeCount: 0,
-        }).then((data) => {
-          for (let i = 0; i < tags.length; i++) {
-            db.sequelize.models.Tag_Palette.create({
-              palette_id: data.id,
-              tag_id: tags[i],
-            });
-          }
-        });
+        }).then((data) => {});
         return res.sendStatus(200);
       }
       return res
