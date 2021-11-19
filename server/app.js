@@ -13,7 +13,7 @@ const models = require("./models");
 // sequelize.sync();
 
 const app = express();
-const port = 80;
+const port = 4000;
 
 app.use(express.json());
 app.use(cookieParser());

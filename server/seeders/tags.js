@@ -3,19 +3,15 @@ const XLSX = require("xlsx");
 
 module.exports = {
   up: async (queryInterface, Sequelize) => {
-    const workbook = XLSX.readFile(__dirname + "/../public/palettes120.xlsx");
+    const workbook = XLSX.readFile(__dirname + "/../public/tags.xlsx");
     const worksheet = workbook.Sheets["Sheet1"];
 
     const datas = [];
     // 행의갯수만큼 반복 , 열의갯수만큼 알파벳추가
-    for (let i = 1; i <= 120; i++) {
+    for (let i = 1; i <= 44; i++) {
       const obj = {
-        color0: `#${worksheet["A" + i].w}`,
-        color1: `#${worksheet["B" + i].w}`,
-        color2: `#${worksheet["C" + i].w}`,
-        color3: `#${worksheet["D" + i].w}`,
-        user_id: worksheet["E" + i].w,
-        likeCount: worksheet["F" + i].w,
+        name: worksheet["A" + i].w,
+        isColorTag: worksheet["B" + i].w,
         createdAt: new Date()
           .toISOString()
           .replace(/T/, " ")
@@ -28,10 +24,10 @@ module.exports = {
       datas.push(obj);
     }
 
-    return queryInterface.bulkInsert("Palettes", datas, {});
+    return queryInterface.bulkInsert("Tags", datas, {});
   },
 
   down: async (queryInterface, Sequelize) => {
-    return queryInterface.bulkDelete("Palettes", null, {});
+    return queryInterface.bulkDelete("Tags", null, {});
   },
 };
