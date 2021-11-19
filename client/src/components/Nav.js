@@ -1,13 +1,20 @@
 import React, { useState } from "react";
+import { useDispatch, useSelector } from "react-redux";
 import { Link, useNavigate } from "react-router-dom";
 import "../styles/App.css";
+import { setShowLoginModal } from "../actions/index";
+import LoginModal from "./LoginModal";
 
 function Nav() {
   const [showRanking, setShowRanking] = useState(false);
-  const history = useNavigate();
+  const state = useSelector((state) => state.usersReducer);
+  const navigate = useNavigate();
+  const dispatch = useDispatch();
   const hadleRankingTime = () => {
     setShowRanking(!showRanking);
   };
+
+  console.log(state.isLogin);
   return (
     <>
       {/* Nav*/}
@@ -24,17 +31,17 @@ function Nav() {
         {/* </Link> */}
         {showRanking ? (
           <div className="timeframe ">
-            <Link to="ranking">
+            <Link to="ranking/months">
               <div className="button small" timeframe="30">
                 Month
               </div>
             </Link>
-            <Link to="ranking">
+            <Link to="ranking/year">
               <div className="button small" timeframe="365">
                 Year
               </div>
             </Link>
-            <Link to="ranking">
+            <Link to="ranking/alltime">
               <div className="button small" timeframe="4000">
                 All time
               </div>
@@ -47,12 +54,20 @@ function Nav() {
             <div className="icon" icon="random"></div>Random
           </a>
         </Link>
-        <Link to="userpage">
-          <a className="tab button" tab="collection">
-            <div className="icon" icon="like"></div>Like
-          </a>
-          <div className="line"></div>
-        </Link>
+        <a
+          className="tab button"
+          tab="collection"
+          onClick={() => {
+            if (state.isLogin) {
+              navigate("/userpage/like");
+            } else {
+              dispatch(setShowLoginModal(true));
+            }
+          }}
+        >
+          <div className="icon" icon="like"></div>Like
+        </a>
+        <div className="line"></div>
       </div>
     </>
   );
