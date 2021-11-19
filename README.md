@@ -28,9 +28,7 @@ Colorboration(컬러보레이션)은 누구나 자유롭게 컬러를 조합해 
 - 마이페이지에서 나의 팔레트, 내가 찜한 팔레트, 이전에 조회한 팔레트를 모아볼 수 있어요.
 
 <br>
-<br>
 
-### 👉 [Colorboration 사용해보기](https://color-boration.tk/) 👈
 
 <br>
 <br>
@@ -59,7 +57,4 @@ Teletubbies(텔레토비)는 알록달록한 아이디어가 가득한 사람들
 <br>
 
 # 🎈 More Info
-
-🚀 [배포 사이트](https://color-boration.tk)
-
 📖 [위키](https://github.com/codestates/Colorboration/wiki)
