@@ -16,31 +16,36 @@ import "./styles/App.css";
 
 function App() {
   return (
-    //  page별로 구분하기 위해 Page 폴더 생성 후 아래 코드를 사용했으나, 라우터가 중첩되는 오류 발생
-    //  예)  랜덤 페이지 방문 후 랭킹 페이지로 이동하면 주소가 http://localhost:3000/random/ranking으로 된다.
-    // <>
-    //   <Routes>
-    //     <Route exact={true} path="/" element={<HomePage />} />
-    //     <Route exact={true} path="/ranking" element={<RankingPage />} />
-    //     <Route exact={true} path="/random" element={<RandomPage />} />
-    //     <Route exact={true} path="/like" element={<PaletteFrame />} />
-    //     <Route exact={true} path="/like" element={<PaletteFrame />} />
-    //     <Route exact={true} path="/create" element={<Create />} />
-    //   </Routes>
-    // </>
     <>
       <Header />
       <div className="flexStart">
         <Nav />
         <Routes>
-          <Route exact={true} path="/" element={<PaletteFrame />} />
-          <Route exact={true} path="/ranking" element={<Ranking />} />
-          <Route exact={true} path="/random" element={<PaletteFrame />} />
+          <Route
+            exact={true}
+            path="/"
+            element={<PaletteFrame isRandom={false} />}
+          />
+          <Route
+            exact={true}
+            path="/:light"
+            element={<PaletteFrame isRandom={false} />}
+          />
+          <Route exact={true} path="/ranking/:period" element={<Ranking />} />
+          <Route
+            exact={true}
+            path="/random"
+            element={<PaletteFrame isRandom={true} />}
+          />
           <Route exact={true} path="/like" element={<PaletteFrame />} />
           <Route exact={true} path="/create" element={<Create />} />
           <Route exact={true} path="/mypage" element={<MyPage />} />
-          <Route exact={true} path="/userpage" element={<UserPage />} />
-          <Route exact={true} path="/palettepage" element={<PalettePage />} />
+          <Route exact={true} path="/userpage/:type" element={<UserPage />} />
+          <Route
+            exact={true}
+            path="/palettepage/:paletteid"
+            element={<PalettePage />}
+          />
         </Routes>
         <SideBar />
       </div>
@@ -49,3 +54,16 @@ function App() {
 }
 
 export default App;
+
+//  page별로 구분하기 위해 Page 폴더 생성 후 아래 코드를 사용했으나, 라우터가 중첩되는 오류 발생
+//  예)  랜덤 페이지 방문 후 랭킹 페이지로 이동하면 주소가 http://localhost:3000/random/ranking으로 된다.
+// <>
+//   <Routes>
+//     <Route exact={true} path="/" element={<HomePage />} />
+//     <Route exact={true} path="/ranking" element={<RankingPage />} />
+//     <Route exact={true} path="/random" element={<RandomPage />} />
+//     <Route exact={true} path="/like" element={<PaletteFrame />} />
+//     <Route exact={true} path="/like" element={<PaletteFrame />} />
+//     <Route exact={true} path="/create" element={<Create />} />
+//   </Routes>
+// </>

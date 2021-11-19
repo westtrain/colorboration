@@ -4,11 +4,15 @@ import { useDispatch, useSelector } from "react-redux";
 import axios from "axios";
 import "../styles/LoginModal.css";
 import { EmailValidation } from "../utils/validation";
-import { handleLogin, handleLoginSuccess } from "../actions/index";
+import {
+  handleLogin,
+  handleLoginSuccess,
+  setShowLoginModal,
+} from "../actions/index";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faTimes } from "@fortawesome/free-solid-svg-icons";
 
-function LoginModal({ setShowLoginModal, setShowSignUpModal }) {
+function LoginModal({ setShowSignUpModal }) {
   const [loginState, setLoginState] = useState({
     email: "",
     password: "",
@@ -19,7 +23,10 @@ function LoginModal({ setShowLoginModal, setShowSignUpModal }) {
   const dispatch = useDispatch();
   const state = useSelector((state) => state.usersReducer);
   //const isLogin = useSelector((state) => state.isLogin);
-  console.log("~~~`", state);
+  const handleLoginModal = (isOpen) => {
+    //isOpen is booleantype
+    dispatch(setShowLoginModal(isOpen));
+  };
 
   const onChangeLoginState = (e) => {
     const { name, value } = e.target;
@@ -71,6 +78,7 @@ function LoginModal({ setShowLoginModal, setShowSignUpModal }) {
 
     // 인증 성공 후, 사용자 정보를 호출. 성공하면 로그인 여부 state 업데이트
     const isAuthenticated = (token) => {
+      console.log(token);
       axios
         .get("http://localhost:4000/users", {
           headers: {
@@ -81,12 +89,12 @@ function LoginModal({ setShowLoginModal, setShowSignUpModal }) {
         .then((res) => {
           console.log(res);
           dispatch(handleLoginSuccess(res.data.data));
-          setShowLoginModal();
+          handleLoginModal(false);
         })
         .catch((error) => {
           console.log("userinfo error", error.response);
           setEmailErrorMessage("아이디 또는 비밀번호가 잘못 입력 되었습니다");
-          setPasswordErrorMessage("아이디와 비밀번호를 정확히 입력해 주세요");
+          setPasswordErrorMessage("다시 로그인 하세요");
         });
     };
   };
@@ -98,7 +106,7 @@ function LoginModal({ setShowLoginModal, setShowSignUpModal }) {
           <div
             className="loginClosed"
             onClick={() => {
-              setShowLoginModal(false);
+              handleLoginModal(false);
             }}
           >
             <FontAwesomeIcon icon={faTimes} size="1x" spin={false} />
@@ -151,7 +159,7 @@ function LoginModal({ setShowLoginModal, setShowSignUpModal }) {
               <span
                 className="pathsignup"
                 onClick={() => {
-                  setShowLoginModal(false);
+                  handleLoginModal(false);
                   setShowSignUpModal(true);
                 }}
               >

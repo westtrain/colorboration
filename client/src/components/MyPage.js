@@ -1,4 +1,7 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
+import { useSelector } from "react-redux";
+import { useNavigate } from "react-router-dom";
+import axios from "axios";
 import "../styles/App.css";
 import Palette from "./Palette";
 import SetModal from "./SetModal";
@@ -6,12 +9,161 @@ import InputFileModal from "./InputFileModal";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faAngleDoubleRight } from "@fortawesome/free-solid-svg-icons";
 import { faCog } from "@fortawesome/free-solid-svg-icons";
+import { Link } from "react-router-dom";
 
 function MyPage() {
-  const arr = Array.from({ length: 100 }, () => 0); //dummy
-  const rankingArr = Array.from({ length: 3 }, () => 0);
+  const state = useSelector((state) => state.usersReducer);
+  const navigate = useNavigate();
   const [showInputFileModal, setShowInputFileModal] = useState(false);
   const [showSetModal, setShowSetModal] = useState(false);
+  const [likePalette, setLikePalette] = useState([
+    {
+      id: 0,
+      color0: "#EEEEEE",
+      color1: "#DDDDDD",
+      color2: "#CCCCCC",
+      color3: "#BBBBBB",
+    },
+    {
+      id: 0,
+      color0: "#EEEEEE",
+      color1: "#DDDDDD",
+      color2: "#CCCCCC",
+      color3: "#BBBBBB",
+    },
+    {
+      id: 0,
+      color0: "#EEEEEE",
+      color1: "#DDDDDD",
+      color2: "#CCCCCC",
+      color3: "#BBBBBB",
+    },
+    {
+      id: 0,
+      color0: "#EEEEEE",
+      color1: "#DDDDDD",
+      color2: "#CCCCCC",
+      color3: "#BBBBBB",
+    },
+  ]);
+  const [myPalette, setMyPalette] = useState([
+    {
+      id: 0,
+      color0: "#EEEEEE",
+      color1: "#DDDDDD",
+      color2: "#CCCCCC",
+      color3: "#BBBBBB",
+    },
+    {
+      id: 0,
+      color0: "#EEEEEE",
+      color1: "#DDDDDD",
+      color2: "#CCCCCC",
+      color3: "#BBBBBB",
+    },
+    {
+      id: 0,
+      color0: "#EEEEEE",
+      color1: "#DDDDDD",
+      color2: "#CCCCCC",
+      color3: "#BBBBBB",
+    },
+    {
+      id: 0,
+      color0: "#EEEEEE",
+      color1: "#DDDDDD",
+      color2: "#CCCCCC",
+      color3: "#BBBBBB",
+    },
+  ]);
+  const [history, setHistory] = useState([
+    {
+      id: 0,
+      color0: "#EEEEEE",
+      color1: "#DDDDDD",
+      color2: "#CCCCCC",
+      color3: "#BBBBBB",
+    },
+    {
+      id: 0,
+      color0: "#EEEEEE",
+      color1: "#DDDDDD",
+      color2: "#CCCCCC",
+      color3: "#BBBBBB",
+    },
+    {
+      id: 0,
+      color0: "#EEEEEE",
+      color1: "#DDDDDD",
+      color2: "#CCCCCC",
+      color3: "#BBBBBB",
+    },
+    {
+      id: 0,
+      color0: "#EEEEEE",
+      color1: "#DDDDDD",
+      color2: "#CCCCCC",
+      color3: "#BBBBBB",
+    },
+  ]);
+
+  const defaultPalette = {
+    id: 0,
+    color0: "#EEEEEE",
+    color1: "#DDDDDD",
+    color2: "#CCCCCC",
+    color3: "#BBBBBB",
+  };
+
+  const getPalette = () => {
+    axios
+      // like 팔레트
+      .get("http://localhost:4000/likes", {
+        headers: {
+          Authorization: state.accessToken,
+        },
+        withCredentials: true,
+      })
+      .then((response) => {
+        console.log("response", response.data.data);
+        const palettesData = response.data.data;
+        while (palettesData.length < 4) {
+          palettesData.push(defaultPalette);
+        }
+        setLikePalette(palettesData);
+      })
+      .catch((error) => {
+        console.log("getPalette() error", error.response);
+      });
+    //마이 팔레트
+    axios
+      .get(`http://localhost:4000/palettes/?user_id=${state.userInfo.id}`, {
+        withCredentials: true,
+      })
+      .then((response) => {
+        const palettesData = response.data.data;
+        while (palettesData.length < 4) {
+          palettesData.push(defaultPalette);
+        }
+        setMyPalette(palettesData);
+      })
+      .catch((error) => {
+        console.log("getPalette() error", error.response);
+      });
+
+    //히스토리
+    if (localStorage.getItem("history")) {
+      const palettesData = JSON.parse(localStorage.getItem("history"));
+      while (palettesData.length < 4) {
+        palettesData.push(defaultPalette);
+      }
+      setHistory(palettesData);
+    }
+  };
+  //getPalette();
+  useEffect(() => {
+    getPalette();
+  }, []);
 
   return (
     <>
@@ -32,29 +184,32 @@ function MyPage() {
             ) : null}
           </div>
           <div className="username">
-            보라돌이
+            {state.userInfo.name}
             <span className="setButton" onClick={() => setShowSetModal(true)}>
               <FontAwesomeIcon icon={faCog} size="1x" spin={false} />
             </span>
           </div>
-          <div className="useremail">1234abcd@gmail.com</div>
+          <div className="useremail">{state.userInfo.email}</div>
         </section>
         <section className="view">
           <section className="area">
             <div className="profilelike">Like</div>
             <div className="profilePalette">
-              <Palette />
+              <Palette palette={likePalette[0]} />
             </div>
             <div className="profilePalette">
-              <Palette />
+              <Palette palette={likePalette[1]} />
             </div>
             <div className="profilePalette">
-              <Palette />
+              <Palette palette={likePalette[2]} />
             </div>
             <div className="profilePalette">
-              <Palette />
+              <Palette palette={likePalette[3]} />
             </div>
-            <div className="moreView">
+            <div
+              className="moreView"
+              onClick={() => navigate("/userpage/like")}
+            >
               <div>more</div>
 
               <FontAwesomeIcon
@@ -68,18 +223,21 @@ function MyPage() {
           <section className="area mypalettesarea">
             <div className="mypalettes">My palettes</div>
             <div className="profilePalette">
-              <Palette />
+              <Palette palette={myPalette[0]} />
             </div>
             <div className="profilePalette">
-              <Palette />
+              <Palette palette={myPalette[1]} />
             </div>
             <div className="profilePalette">
-              <Palette />
+              <Palette palette={myPalette[2]} />
             </div>
             <div className="profilePalette">
-              <Palette />
+              <Palette palette={myPalette[3]} />
             </div>
-            <div className="moreView">
+            <div
+              className="moreView"
+              onClick={() => navigate("/userpage/mypalette")}
+            >
               <div>more</div>
 
               <FontAwesomeIcon
@@ -93,18 +251,21 @@ function MyPage() {
           <section className="area historyarea">
             <div className="history">History</div>
             <div className="profilePalette">
-              <Palette />
+              <Palette palette={history[0]} />
             </div>
             <div className="profilePalette">
-              <Palette />
+              <Palette palette={history[1]} />
             </div>
             <div className="profilePalette">
-              <Palette />
+              <Palette palette={history[2]} />
             </div>
             <div className="profilePalette">
-              <Palette />
+              <Palette palette={history[3]} />
             </div>
-            <div className="moreView">
+            <div
+              className="moreView"
+              onClick={() => navigate("/userpage/history")}
+            >
               <div>more</div>
 
               <FontAwesomeIcon

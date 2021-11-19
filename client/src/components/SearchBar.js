@@ -1,17 +1,16 @@
 import React, { useState, useEffect } from "react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { useSelector } from "react-redux";
+import axios from "axios";
 import "../styles/App.css";
 import Tag from "./Tag";
 
 function SearchBar() {
-  const arr = Array.from({ length: 20 }, () => 0);
   const [showDropdown, setShowDropdown] = useState(false);
   const [tagsId, setTagsId] = useState([]); //tag 아이디 저장
   const [tagsName, setTagsName] = useState([]); //tag name 저장
-  const color = "#FFE652";
   const state = useSelector((state) => state.usersReducer);
-
+  const navigate = useNavigate();
   const handledropdown = () => {
     setShowDropdown(!showDropdown);
   };
@@ -21,14 +20,30 @@ function SearchBar() {
     setTagsName([]);
   };
 
+  // const handleSearch = () => {
+  //   if (tagsId.length !== 0) {
+  //     axios
+  //       .get("http://localhost:4000/palettes/filterd", tagsId, {
+  //         withCredentials: true,
+  //       })
+  //       .then((response) => {
+  //         console.log("response", response.data);
+  //       })
+  //       .catch((error) => {
+  //         console.log("search error", error.response);
+  //       });
+  //   }
+  // };
+  const handleSearch = () => {
+    navigate(`/light`);
+  };
+
   const addTags = (tag) => {
     if (!tagsId.includes(tag.id)) {
       setTagsId([...tagsId, tag.id]);
       setTagsName([...tagsName, tag.name]);
     }
   };
-
-  const getTags = () => {};
 
   useEffect(() => {}, []);
 
@@ -46,7 +61,9 @@ function SearchBar() {
         <a className="clear" onClick={() => handleClear()}>
           ✕
         </a>
-        <a className="searchStart">Search</a>
+        <a className="clear" onClick={() => handleSearch()}>
+          Search
+        </a>
       </div>
       {showDropdown ? (
         <div className="filterWindow dropdown hidden card ">
