@@ -3,7 +3,7 @@ let XLSX = require("xlsx");
 
 module.exports = {
   up: async (queryInterface, Sequelize) => {
-    let workbook = XLSX.readFile(__dirname + "/../public/palettes120.xlsx");
+    let workbook = XLSX.readFile(__dirname + "/../public/palettes.xlsx");
     let worksheet = workbook.Sheets["Sheet1"];
 
     let datas = [];
@@ -28,10 +28,10 @@ module.exports = {
       datas.push(obj);
     }
 
-    return queryInterface.bulkInsert("Palettes", datas, {});
+    return queryInterface.bulkInsert("palettes", datas, {});
   },
 
   down: async (queryInterface, Sequelize) => {
-    return queryInterface.bulkDelete("Palettes", null, {});
+    return queryInterface.bulkDelete("palettes", null, {});
   },
 };
