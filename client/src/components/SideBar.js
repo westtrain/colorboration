@@ -1,9 +1,22 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 import MiniPalette from "./MiniPalette";
 import "../styles/App.css";
 
 function SideBar() {
-  const arr = Array.from({ length: 8 }, () => 0);
+  const [historyArr, setHistoryArr] = useState([]);
+  const getHistory = () => {
+    if (localStorage.getItem("history")) {
+      setHistoryArr(JSON.parse(localStorage.getItem("history")));
+    }
+  };
+  const setHistory = () => {
+    localStorage.setItem("history", JSON.stringify([]));
+  };
+
+  useEffect(() => {
+    //setHistory();
+    getHistory();
+  }, [historyArr]);
   return (
     <>
       <div className="sidebar right">
@@ -11,10 +24,10 @@ function SideBar() {
         <div className="history">
           <div className="flex"></div>
           <div className="likesList">
-            {arr.map((v) => {
+            {historyArr.map((palette) => {
               return (
                 <div className="item">
-                  <MiniPalette />
+                  <MiniPalette palette={palette} />
                 </div>
               );
             })}
@@ -27,19 +40,3 @@ function SideBar() {
 }
 
 export default SideBar;
-
-{
-  /* Side Bar*/
-}
-<div className="right">
-  <div className="likes">
-    <div className="flex">
-      <a href="#" className="title">
-        Collection
-      </a>
-    </div>
-    <div className="likesList">
-      <div className="palette"></div>
-    </div>
-  </div>
-</div>;

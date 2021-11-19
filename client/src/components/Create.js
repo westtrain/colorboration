@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import { useSelector } from "react-redux";
+import { useNavigate } from "react-router-dom";
 import axios from "axios";
 //import { useHistory } from "react-router-dom";
 import "../styles/App.css";
@@ -7,8 +8,8 @@ import MiniSearchBar from "./MiniSearhBar";
 import { ChromePicker } from "react-color";
 
 function Create() {
-  //const history = useHistory();
   const state = useSelector((state) => state.usersReducer);
+  const navigate = useNavigate();
   const [showPicker, setShowPicker] = useState(false);
   const [pickerNumber, setPickerNumber] = useState(0);
   const [createState, setCreateState] = useState({
@@ -17,20 +18,25 @@ function Create() {
     color1: "#CCCCCC",
     color0: "#BBBBBB",
     tags: [],
-    user_id: null,
+    user_id: state.userInfo.id,
   });
+  //addTagPalette
   //state.userInfo.user_info
   const onClickSubmit = () => {
     if (createState.tags.length === 0) {
-      alert();
+      return;
     } else {
       axios
         .post("http://localhost:4000/palettes", createState, {
+          headers: {
+            Authorization: state.accessToken,
+          },
           withCredentials: true,
         })
         .then((res) => {
           console.log(res.status);
           console.log("팔레트 생성을 완료했습니다");
+          navigate("/");
           //history.push("/");
         })
         .catch((error) => {
@@ -46,7 +52,6 @@ function Create() {
       setShowPicker(true);
     }
     setPickerNumber(colorNumber);
-    console.log(createState);
   };
   /* 피커창 닫기
   const closeColorPicker = (e) => {
@@ -87,8 +92,13 @@ function Create() {
               ></div>
             </div>
 
-            <MiniSearchBar />
-            <div className="submitpalette">Submit Palette</div>
+            <MiniSearchBar
+              createState={createState}
+              setCreateState={setCreateState}
+            />
+            <div className="submitpalette" onClick={() => onClickSubmit()}>
+              Submit Palette
+            </div>
           </div>
           <div className="colorselectarea">
             <div className="colorselect">

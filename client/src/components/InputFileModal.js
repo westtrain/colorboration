@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import axios from "axios";
-import "../styles/DeleteModal.css";
+import "../styles/InputModal.css";
 
 function InputFileModal({ setShowInputFileModal }) {
   const [selectedFile, setSelectedFile] = useState(null);
@@ -25,9 +25,9 @@ function InputFileModal({ setShowInputFileModal }) {
   return (
     <div className="page">
       <div className="modalback">
-        <div className="modalview">
-          <div className="headarea ">Upload Image</div>
-          <div className="checkdelete">
+        <div className="inputmodalview">
+          <div className="inputheadarea ">Upload Image</div>
+          <div className="checkinput">
             <input type="file" onChange={handleFileChange} />
           </div>
           <div className="">

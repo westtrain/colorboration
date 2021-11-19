@@ -1,29 +1,53 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
-import { useDispatch, useSelector } from "react-redux";
+import { useSelector } from "react-redux";
+import axios from "axios";
 import "../styles/App.css";
 import Tag from "./Tag";
 
-function MiniSearchBar() {
-  const arr = Array.from({ length: 20 }, () => 0);
+function MiniSearchBar({ createState, setCreateState }) {
   const [showDropdown, setShowDropdown] = useState(false);
-  const [tags, setTags] = useState([]);
-  const color = "#FFE652";
+  const [tagsId, setTagsId] = useState([]); //tag 아이디 저장
+  const [tagsName, setTagsName] = useState([]); //tag name 저장
+  const state = useSelector((state) => state.usersReducer);
 
   const handledropdown = () => {
     setShowDropdown(!showDropdown);
   };
 
   const handleClear = () => {
-    setTags([]);
+    setTagsId([]);
+    setTagsName([]);
   };
 
-  const addTags = (tagColor) => {
-    if (!tags.includes(tagColor)) {
-      setTags([...tags, tagColor]);
+  const handleSearch = () => {
+    if (tagsId.length !== 0) {
+      axios
+        .get("http://localhost:4000/palettes/filterd", tagsId, {
+          withCredentials: true,
+        })
+        .then((response) => {
+          console.log("response", response.data);
+        })
+        .catch((error) => {
+          console.log("search error", error.response);
+        });
     }
   };
 
+  const addTags = (tag) => {
+    if (!tagsId.includes(tag.id)) {
+      setTagsId([...tagsId, tag.id]);
+      setTagsName([...tagsName, tag.name]);
+      setCreateState({
+        ...createState,
+        ["tags"]: [...createState.tags, tag.id],
+      });
+      console.log(createState.tags);
+    }
+  };
+
+  useEffect(() => {}, []);
   return (
     <>
       {showDropdown ? (
@@ -32,37 +56,41 @@ function MiniSearchBar() {
             <div className="title">Colors</div>
             <div className="line"></div>
             <div className="colorsTag">
-              {arr.map((v, i) => {
-                return (
-                  <div>
-                    <Tag color={color} addTags={addTags} key={i} />
-                  </div>
-                );
+              {state.tags.map((tag, i) => {
+                if (tag.isColorTag) {
+                  return (
+                    <div>
+                      <Tag tag={tag} addTags={addTags} key={i} />
+                    </div>
+                  );
+                }
               })}
             </div>
           </div>
-
           <div className="collection section">
             <div className="title">Collections</div>
             <div className="line"></div>
             <div className="colorsTag">
-              {arr.map((v, i) => {
-                return (
-                  <div>
-                    <Tag addTags={addTags} key={i} />
-                  </div>
-                );
+              {state.tags.map((tag, i) => {
+                if (!tag.isColorTag) {
+                  return (
+                    <div>
+                      <Tag tag={tag} addTags={addTags} key={i} />
+                    </div>
+                  );
+                }
               })}
             </div>
-          </div>
-
-          <div className="related section hide">
-            <div className="title">Related</div>
           </div>
         </div>
       ) : null}
       <div className="addinput" onClick={handledropdown}>
-        <input className="" placeholder="Search Tags" value={tags} readonly />
+        <input
+          className=""
+          placeholder="Search Tags"
+          value={tagsName}
+          readonly
+        />
         {/* <input placeholder="Search palettes" onKeyUp="showTags()" /> */}
         <div className="searchIcon icon" icon="search"></div>
         <a className="minisearchclear" onClick={() => handleClear()}>
