@@ -6,6 +6,7 @@ import { setShowLoginModal } from "../actions/index";
 import LoginModal from "./LoginModal";
 import SignUpModal from "./SignUpModal";
 import SearchBar from "./SearchBar";
+import ColorborationLogo from "../logo.png";
 
 function Header() {
   //const [showLoginModal, setShowLoginModal] = useState(false);
