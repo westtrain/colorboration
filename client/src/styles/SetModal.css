@@ -1,0 +1,106 @@
+.page {
+  display: flex;
+}
+
+.modalback {
+  position: fixed;
+  z-index: 999;
+  top: 0;
+  right: 0;
+  left: 0;
+  bottom: 0;
+  background-color: rgba(0, 0, 0, 0.4);
+  display: grid;
+  place-items: center;
+}
+
+.setmodalview {
+  background-color: #fff;
+  border-radius: 20px;
+  width: 400px;
+  height: 430px;
+  display: grid;
+  place-items: center;
+  padding: 20px 25px 15px 25px;
+}
+
+.setclosed {
+  cursor: pointer;
+  font-size: 20px;
+  margin: -1.5em 0 -1em 19em;
+}
+
+.setheadarea {
+  font-size: 25px;
+}
+
+.setarea {
+  color: #7e7c7c;
+  display: block;
+  margin: 0 0 15px 0;
+}
+
+.setarea > div > span {
+  height: 12px;
+  float: right;
+  font-size: 11px;
+  color: rgb(250, 152, 123);
+  padding: 5px;
+}
+
+.setarea > input {
+  border: solid 1px #c4c3c3;
+  border-radius: 5px;
+  height: 36px;
+  width: 308px;
+  margin: 5px 0 3px 0;
+}
+
+button {
+  background-color: rgb(179, 178, 248);
+  width: 308px;
+  height: 36px;
+  font-size: 25px;
+  color: #fff;
+  text-align: center;
+  border-radius: 5px;
+  border: #fff;
+}
+
+button:hover {
+  background-color: rgb(211, 211, 248);
+}
+
+button:active {
+  background-color: rgb(164, 164, 248);
+}
+
+.deleteaccount {
+  color: #7e7c7c;
+}
+
+.deleteaccount:hover {
+  color: rgb(54, 53, 53);
+}
+
+@media screen and (max-width: 1025px) {
+  .feed {
+    margin: 0 2.5em 0 2.5em;
+  }
+
+  .item {
+    width: calc(33.33333% - 1.25em);
+    margin: 1.25em 0 0 1.25em;
+  }
+}
+
+@media screen and (max-width: 725px) {
+  .feed {
+    margin: 0 1.25em 0 1.25em;
+  }
+
+  .item {
+    width: calc(50% - 1.25em);
+    margin: 1.25em 0 0 1.25em;
+  }
+}

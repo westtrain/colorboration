@@ -1,0 +1,94 @@
+.page {
+  display: flex;
+}
+
+.modalback {
+  position: fixed;
+  z-index: 999;
+  top: 0;
+  right: 0;
+  left: 0;
+  bottom: 0;
+  background-color: rgba(0, 0, 0, 0.4);
+  display: grid;
+  place-items: center;
+}
+
+.signupmodalview {
+  background-color: #fff;
+  border-radius: 20px;
+  width: 400px;
+  height: 450px;
+  display: grid;
+  place-items: center;
+  padding: 20px 25px 15px 25px;
+}
+
+.signupClosed {
+  cursor: pointer;
+  font-size: 20px;
+  margin: -1.5em 0 -1em 19em;
+}
+
+.signupheadarea {
+  font-size: 25px;
+}
+
+.signuparea {
+  color: #7e7c7c;
+}
+
+.signuparea > div > span {
+  float: right;
+  font-size: 10px;
+  color: rgb(250, 152, 123);
+}
+
+input {
+  border: solid 1px #c4c3c3;
+  border-radius: 5px;
+  height: 36px;
+  width: 308px;
+  margin: 5px 0 15px 0;
+}
+
+button {
+  background-color: rgb(179, 178, 248);
+  width: 308px;
+  height: 36px;
+  font-size: 25px;
+  color: #fff;
+  text-align: center;
+  border-radius: 5px;
+  border: #fff;
+}
+
+button:hover {
+  background-color: rgb(211, 211, 248);
+}
+
+button:active {
+  background-color: rgb(164, 164, 248);
+}
+
+@media screen and (max-width: 1025px) {
+  .feed {
+    margin: 0 2.5em 0 2.5em;
+  }
+
+  .item {
+    width: calc(33.33333% - 1.25em);
+    margin: 1.25em 0 0 1.25em;
+  }
+}
+
+@media screen and (max-width: 725px) {
+  .feed {
+    margin: 0 1.25em 0 1.25em;
+  }
+
+  .item {
+    width: calc(50% - 1.25em);
+    margin: 1.25em 0 0 1.25em;
+  }
+}

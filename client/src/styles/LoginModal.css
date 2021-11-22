@@ -1,0 +1,148 @@
+.page {
+  display: block;
+}
+
+.modalback {
+  position: fixed;
+  z-index: 999;
+  top: 0;
+  right: 0;
+  left: 0;
+  bottom: 0;
+  background-color: rgba(0, 0, 0, 0.4);
+  display: grid;
+  place-items: center;
+}
+
+.loginmodalview {
+  background-color: #fff;
+  border-radius: 20px;
+  width: 400px;
+  height: 450px;
+  display: grid;
+  place-items: center;
+  padding: 20px 25px 15px 25px;
+  animation: modal-show 0.3s;
+}
+
+.loginClosed {
+  cursor: pointer;
+  font-size: 20px;
+  margin: -1.5em 0 -1em 19em;
+}
+
+.loginHeadarea {
+  font-size: 25px;
+}
+
+.loginArea {
+  display: block;
+  color: #7e7c7c;
+}
+
+.loginEmailarea {
+  margin: -1em 0 0em 0;
+}
+
+.loginPasswordarea {
+  margin: 1em 0 2em 0;
+}
+
+.loginArea > div > span {
+  height: 12px;
+  float: right;
+  font-size: 11px;
+  font-weight: 500;
+  color: rgb(250, 152, 123);
+  padding: 0 0 5 0;
+}
+
+input {
+  border: solid 1px #c4c3c3;
+  border-radius: 5px;
+  height: 36px;
+  width: 308px;
+  margin: 10px 0 0 0;
+}
+
+.loginbutton {
+  background-color: rgb(179, 178, 248);
+  width: 308px;
+  height: 36px;
+  font-size: 25px;
+  color: #fff;
+  text-align: center;
+  border-radius: 5px;
+  border: none;
+}
+
+.loginbutton:hover {
+  background-color: rgb(211, 211, 248);
+}
+
+.loginbutton:active {
+  background-color: rgb(164, 164, 248);
+}
+
+.socialloginBtn {
+  width: 50%;
+  height: 25px;
+  display: flex;
+  border: solid 1px #c4c3c3;
+  border-radius: 5px;
+  background-color: #fff;
+  align-content: center;
+  text-align: center;
+}
+
+.socialloginBtn:hover {
+  background-color: rgb(241, 240, 238);
+}
+
+.socialloginBtn:active {
+  background-color: #c4c3c3;
+}
+
+.googleLogo {
+  padding-right: 10px;
+}
+
+.socialloginBtn > div {
+  font-size: 15px;
+  color: #7e7c7c;
+  margin-left: 20px;
+}
+
+.checksignup {
+  color: #7e7c7c;
+}
+
+.pathsignup {
+  margin: 0 0 0 10px;
+}
+
+.pathsignup:hover {
+  color: rgb(54, 53, 53);
+}
+
+@media screen and (max-width: 1025px) {
+  .feed {
+    margin: 0 2.5em 0 2.5em;
+  }
+
+  .item {
+    width: calc(33.33333% - 1.25em);
+    margin: 1.25em 0 0 1.25em;
+  }
+}
+
+@media screen and (max-width: 725px) {
+  .feed {
+    margin: 0 1.25em 0 1.25em;
+  }
+
+  .item {
+    width: calc(50% - 1.25em);
+    margin: 1.25em 0 0 1.25em;
+  }
+}
